@@ -78,3 +78,5 @@ Route::post('StatusSave','StatusControllers\StatusEntryController@SaveStatus');
 Route::get('StatusUpdate','StatusControllers\StatusUpdateController@index');
 
 Route::post('UpdateStatus','StatusControllers\StatusUpdateController@Update');
+
+Route::get('OrderEntry','OrderControllers\OrderEntryController@index');

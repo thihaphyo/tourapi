@@ -36,3 +36,16 @@
     padding: 0%!important;
 }
 
+.select2-container--bootstrap .select2-selection--single{
+    padding-top: 10px!important;
+    padding-left: 10px!important;
+}
+
+.select2-container--bootstrap .select2-selection{
+    border-radius: 0px!important;
+}
+
+.list-group-item:first-child,.list-group-item:last-child{
+    border-radius: 0px!important;
+}
+

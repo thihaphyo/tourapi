@@ -56,6 +56,9 @@
     <link rel="stylesheet" href="{{asset('bower_components/font-awesome/css/font-awesome.min.css')}}">
 
 
+    <link rel="stylesheet" href="{{asset('bower_components/select2/css/select2.min.css')}}">
+
+    <link rel="stylesheet" href="{{asset('bower_components/select2/css/select2.bootstrap.min.css')}}">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -147,6 +150,16 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="{{url('OrderEntry')}}">
+                        <i class="fa fa-credit-card"></i>
+                        <span>Add New Order</span>
+                        <span class="pull-right-container">
+                         <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                </li>
+
 
 
             </ul>
@@ -201,6 +214,10 @@
 <script src="{{asset('bower_components/fastclick/lib/fastclick.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('js/app.js')}}"></script>
+
+<script src="{{asset('bower_components/bootstrap/dist/js/bootstrap.js')}}"></script>
+
+<script src="{{asset('bower_components/select2/js/select2.js')}}"></script>
 
 
 </body>

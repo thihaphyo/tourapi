@@ -40,4 +40,12 @@ class CommonFunctions
     {
         return $lava->render($chartType, $chartName, $chartContainer);
     }
+
+
+    public function AutoGenerateOrderID($num)
+    {
+        $id= "ORD".date('Ymd').$num;
+
+        return $id;
+    }
 }
