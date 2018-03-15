@@ -18,7 +18,7 @@
 @section('content')
 
     <style>
-
+    
         .select2-container--bootstrap{
             width: 100%!important;
         }
