@@ -80,3 +80,15 @@ Route::get('StatusUpdate','StatusControllers\StatusUpdateController@index');
 Route::post('UpdateStatus','StatusControllers\StatusUpdateController@Update');
 
 Route::get('OrderEntry','OrderControllers\OrderEntryController@index');
+
+Route::post('OrderSave','OrderControllers\OrderEntryController@Save');
+
+Route::get('OrderListing','OrderControllers\OrderListingController@index');
+
+Route::get('GetOrderList','OrderControllers\OrderListingController@LoadOrder');
+
+Route::get('OrderUpdate','OrderControllers\OrderUpdateController@index');
+
+Route::get('CustUpdate','OrderControllers\OrderUpdateController@UpdateCustomerInfo');
+
+Route::get('ItemUpdate','OrderControllers\OrderUpdateController@UpdateItemInfo');

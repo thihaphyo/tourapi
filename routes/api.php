@@ -35,3 +35,5 @@ Route::get('/jsonData',function(){
 
 	return json_encode($data);
 });
+
+Route::post('/CustUpdate','OrderControllers\OrderUpdateController@UpdateCustomerInfo');

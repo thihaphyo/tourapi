@@ -49,3 +49,14 @@
     border-radius: 0px!important;
 }
 
+.remove{
+    height: 20px;
+    padding-top: 1px;
+    border-radius: 0px;
+}
+
+.ui-widget-header{
+    background: white!important;
+    border-bottom:1px solid #dddddd!important;
+}
+

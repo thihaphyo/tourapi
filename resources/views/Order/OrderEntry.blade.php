@@ -35,22 +35,61 @@
 
 
                var book_name = $("#item_name option:selected").text();
-               var book_price = $("#item_name option:selected").val();
+               var book_price = $("#item_name option:selected").val().split('book_id')[0];
+               var book_id = $("#item_name option:selected").val().split('book_id')[1];
 
                total = total + parseInt(book_price);
 
                var rem_id = book_name.replace(/ \//g,"\n");
 
 
-               $(".no-info").remove();
-               $("#list-Container-name").append('<a class="list-group-item '+book_name+'"> ' + book_name + '</a>');
-               $("#list-Container").append('<a class="list-group-item '+book_name+'"> ' + book_price  +'</a>');
+               $("#no_info").remove();
+               var html = '';
+               html+='<tr>';
+               html+='<td>'+book_name;
+               html+='<input type="hidden" name="hddBookName[]" value="'+book_name+'">';
+               html+='<input type="hidden" name="hddBookID[]" value="'+book_id+'">';
+               html+='</td>';
+               html+='<td>'+book_price;
+               html+='<input type="hidden" name="hddBookPrice[]" value="'+book_price+'">';
+               html+='</td>';
+               html+='<td><button type="button" name="remove" class="btn btn-danger btn-sm remove"><span class="glyphicon glyphicon-minus"></span></button></td>';
+               html+='</tr>';
+
+               $('#item_table > tbody').append(html);
 
                $('#lblTotal').text(total);
+
+               $('#hddTotal').val(total);
+
 
                count++;
 
                // var lastClass = $('div').attr('class').split(' ').pop();
+           });
+
+           $(document).on('click', '.remove', function(){
+               var no_html ='';
+
+               var rem_val =parseInt($(this).parent().siblings(":nth-child(2)").text().split('book_id')[0]);
+               total-=rem_val;
+
+               $(this).closest('tr').remove();
+               $('#lblTotal').text(total);
+               $('#hddTotal').val(total);
+
+               count--;
+
+               if(count === 0)
+               {
+                    no_html+='<tr>';
+                    no_html+='<td id="no_info" class="text-center" colspan="3">No Info Yet</td>';
+
+                    $('#item_table > tbody').append(no_html);
+                    $('#lblTotal').text(total);
+                    $('#hddTotal').val(total);
+
+               }
            });
        }) ;
 
@@ -68,6 +107,8 @@
             {{csrf_field()}}
 
             <input type="hidden" id="hddOrderUniqID" name="hddOrderUniqID" value="{{$auto_id}}">
+            <input type="hidden" id="hddTotal" name="hddTotal" value="0">
+
 
             <div class="row">
                 <div class="col-md-12">
@@ -145,7 +186,7 @@
 
                                 <select class="form-control select-box" id="item_name" name="item_name">
                                     @foreach($book_data as $key => $value)
-                                        <option value="{{$value->price}}">{{$value->book_name}}</option>
+                                        <option value="{{$value->price.'book_id'.$value->book_id}}">{{$value->book_name}}</option>
                                     @endforeach
                                 </select>
                                 <span class="input-group-btn">
@@ -157,32 +198,31 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="list-group" id="list-Container-name">
-                            <a href="#" class="list-group-item list-group-item-info">Book Name</a>
-                            <a href="#" class="list-group-item no-info">No Info</a>
-                        </div>
-                    </div>
-                    <div class="col-md-4" style="margin-left: -30px;">
-                        <div class="list-group" id="list-Container">
-                            <a href="#" class="list-group-item list-group-item-info">Book Price</a>
-                            <a href="#" class="list-group-item no-info">No Info</a>
-                        </div>
+                    <div class="col-md-8 table-responsive">
+                        <table class="table table-bordered table-striped" id="item_table">
+                            <thead class="bg-info">
+                               <th class="text-info">Book Name</th>
+                               <th class="text-info">Book Price</th>
+                               <th class="text-info">Action</th>
+                            </thead>
+                            <tbody>
+                                <tr id="no_info">
+                                    <td colspan="3" class="text-center">No Info Yet</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr class="footer">
+                                    <td class="text-right">Total</td>
+                                    <td colspan="2" class="text-right" id="lblTotal">
+                                        0
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-4" style="margin-top: -20px;">
-                        <div class="list-group" id="">
-                            <a href="#" class="list-group-item">Total</a>
-                        </div>
-                    </div>
-                    <div class="col-md-4" style="margin-left: -30px;margin-top: -20px;">
-                        <div class="list-group" id="list-Container-total">
-                            <a href="#" class="list-group-item" id="lblTotal">0</a>
-                        </div>
-                    </div>
-                </div>
+
 
 
 

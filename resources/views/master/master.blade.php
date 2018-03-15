@@ -160,6 +160,16 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="{{url('OrderListing')}}">
+                        <i class="fa fa-credit-card"></i>
+                        <span>Order Listing</span>
+                        <span class="pull-right-container">
+                         <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                </li>
+
 
 
             </ul>
