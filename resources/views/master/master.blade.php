@@ -124,7 +124,7 @@
 
                 <li class="{{\Session::get('CurrentPage') == 'bookListing' ? 'active' : ''}}">
                     <a href="{{url('BookListing')}}">
-                        <i class="fa fa-credit-card"></i>
+                        <i class="fa fa-bank"></i>
                         <span>Book Listing</span>
                         <span class="pull-right-container">
                          <i class="fa fa-angle-left pull-right"></i>
@@ -136,7 +136,7 @@
 
                 <li class="{{\Session::get('CurrentPage') == 'statusEntry' ? 'active' : ''}}">
                     <a href="{{url('StatusEntry')}}">
-                        <i class="fa fa-credit-card"></i>
+                        <i class="fa fa-cog"></i>
                         <span>Add New Status</span>
                         <span class="pull-right-container">
                          <i class="fa fa-angle-left pull-right"></i>
@@ -146,7 +146,7 @@
 
                 <li class="{{\Session::get('CurrentPage') == 'statusListing' ? 'active' : ''}}">
                     <a href="{{url('GetStatusList')}}">
-                        <i class="fa fa-credit-card"></i>
+                        <i class="fa fa-cogs"></i>
                         <span>Status Listing</span>
                         <span class="pull-right-container">
                          <i class="fa fa-angle-left pull-right"></i>
@@ -156,7 +156,7 @@
 
                 <li class="{{\Session::get('CurrentPage') == 'orderEntry' ? 'active' : ''}}">
                     <a href="{{url('OrderEntry')}}">
-                        <i class="fa fa-credit-card"></i>
+                        <i class="fa fa-cube"></i>
                         <span>Add New Order</span>
                         <span class="pull-right-container">
                          <i class="fa fa-angle-left pull-right"></i>
@@ -166,7 +166,7 @@
 
                 <li class="{{\Session::get('CurrentPage') == 'orderListing' ? 'active' : ''}}">
                     <a href="{{url('OrderListing')}}">
-                        <i class="fa fa-credit-card"></i>
+                        <i class="fa fa-cubes"></i>
                         <span>Order Listing</span>
                         <span class="pull-right-container">
                          <i class="fa fa-angle-left pull-right"></i>

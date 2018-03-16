@@ -23,8 +23,10 @@
                 columns: [
                     {data: 'order_id', name: 'order_id'},
                     {data: 'order_date', name: 'order_date'},
-                    {data: 'status_id', name: 'status_id'},
-                    {data: 'post_code' , name : 'post_code'},
+                    {data: 'current_status', name: 'current_status'},
+                    {data: 'status_date' , name : 'status_date'},
+                    {data: 'item_count' , name : 'item_count'},
+                    {data: 'total_price' , name : 'total_price'},
                     {data: 'action', name: 'action', orderable: false, searchable: false}
                 ]
             });
@@ -80,7 +82,9 @@
                         <th>Order ID</th>
                         <th>Order Date</th>
                         <th>Current Status</th>
-                        <th>Post Code</th>
+                        <th>Status Date</th>
+                        <th>Item Count</th>
+                        <th>Total Price</th>
                         <th>Edit</th>
                         </thead>
                     </table>

@@ -21,7 +21,7 @@
        $('document').ready(function () {
 
            $( "#dateRange" ).datepicker();
-           $( "#dateRange" ).datepicker( "option", "dateFormat","yy-mm-dd" );
+           $( "#dateRange" ).datepicker( "option", "dateFormat","yy/mm/dd" );
            $( "#dateRange" ).datepicker( "option", "showAnim", "drop" );
 
            $( "#item_name" ).select2({
@@ -92,8 +92,6 @@
                }
            });
        }) ;
-
-
 
     </script>
     <div class="container content-body">
@@ -221,10 +219,6 @@
                         </table>
                     </div>
                 </div>
-
-
-
-
 
                 <div class="row">
                     <div class="col-md-4">
