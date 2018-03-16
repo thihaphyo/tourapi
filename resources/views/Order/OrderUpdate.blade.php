@@ -28,6 +28,11 @@
         #btn-Add:hover{
             background:lightgray;
         }
+
+        .status_table{
+            max-height: 150px;
+            overflow-y: auto;
+        }
     </style>
 
     <script>
@@ -45,8 +50,8 @@
 
         $('document').ready(function () {
 
-            $( "#dateRange" ).datepicker({ dateFormat: 'yy-mm-dd' });
-            $('#statusDate').datepicker({ dateFormat: 'yy-mm-dd' });
+            $( "#dateRange" ).datepicker({ dateFormat: 'yy/mm/dd' });
+            $('#statusDate').datepicker({ dateFormat: 'yy/mm/dd' });
 
             $( "#item_name" ).select2({
                 theme: "bootstrap"
@@ -171,6 +176,7 @@
 
 
             $('#btn-Cust').on('click',function () {
+                $("#LoadingImage").show();
 
                 $.ajaxSetup({
                     headers: {
@@ -200,7 +206,11 @@
                     dataType: 'json',
                     success: function (data) {
                         if(data=="Success"){
-                            alert('Successfully Updated Customer Info');
+                            $("#LoadingImage").hide();
+                            $.alert({
+                                title: 'Information',
+                                content: 'Successfully Updated Customer Info!',
+                            });
                         }
 
                     },
@@ -213,8 +223,9 @@
             });
 
 
-
             $('#btn-Item').on('click',function () {
+
+                $("#LoadingImage").show();
 
                 $.ajaxSetup({
                     headers: {
@@ -247,7 +258,13 @@
                     dataType: 'json',
                     success: function (data) {
                         if(data=="Success"){
-                            alert('Successfully Updated Item Info');
+                            $("#LoadingImage").hide();
+
+                            $.alert({
+                                title: 'Information',
+                                content: 'Successfully Updated Item Info!',
+                            });
+
                         }
 
                     },
@@ -262,14 +279,13 @@
 
             $('#btn-Status').on('click',function () {
 
+                $("#LoadingImage").show();
+
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
                     }
                 });
-
-
-
 
 
                 var formData = {
@@ -281,10 +297,11 @@
 
 
 
-                var StatusUpdateUrl = "StatusUpdate";
+                var StatusUpdateUrl = "OrderStatusUpdate";
                 var type = "GET";
 
                 var StatusLogUrl = "GetStatusLog";
+
 
 
                 $.ajax({
@@ -296,6 +313,12 @@
                     success: function (data) {
 
                         $('#status_body').html(data.toString());
+                        $("#LoadingImage").hide();
+
+                        $.alert({
+                            title: 'Information',
+                            content: 'Successfully Updated Status Info!',
+                        });
 
                     },
                     error: function (data) {
@@ -318,6 +341,11 @@
                 <h4 class="h4 heading-blue">Order Edit</h4>
             </div>
         </div>
+
+        <div id="LoadingImage" style="display:none;position: absolute; top: 280px;left:500px; z-index: 99999; height: 600px;">
+            <img src="{{asset('images/loader.gif')}}" style="" />
+        </div>
+
         <form method="POST"  id="search-form" action="{{'ItemUpdate'}}">
             {{csrf_field()}}
 
@@ -550,7 +578,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-8 table-responsive">
+                                <div class="col-md-8 table-responsive status_table">
                                     <table class="table table-bordered table-striped" id="status_table">
                                         <thead class="bg-info">
                                         <th class="text-info">Status ID</th>

@@ -24,12 +24,15 @@ class BookListingController extends Controller
         $this->view = "Book.BookListing";
         $this->CommonFunction = new CommonFunctions;
 
+
     }
 
     public function index(){
 
         try{
             $this->master_array=array('book_data'=>null);
+
+            \Session::put('CurrentPage','bookListing');
 
             return $this->CommonFunction->Redirect($this->view,$this->master_array);
 

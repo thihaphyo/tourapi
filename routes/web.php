@@ -93,6 +93,6 @@ Route::get('CustUpdate','OrderControllers\OrderUpdateController@UpdateCustomerIn
 
 Route::get('ItemUpdate','OrderControllers\OrderUpdateController@UpdateItemInfo');
 
-Route::get('StatusUpdate','OrderControllers\OrderUpdateController@UpdateStatusInfo');
+Route::get('OrderStatusUpdate','OrderControllers\OrderUpdateController@UpdateStatusInfo');
 
 Route::get('GetStatusLog','OrderControllers\OrderUpdateController@GetStatusLog');

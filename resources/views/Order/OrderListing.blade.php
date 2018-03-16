@@ -1,6 +1,6 @@
 @extends('master.master')
 
-@section('title', 'Book Listing')
+@section('title', 'Order Listing')
 
 @section('content')
     <script>

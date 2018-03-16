@@ -26,6 +26,7 @@ class BookUpdateController extends Controller
     {
         $this->view = "Book.BookUpdate";
         $this->CommonFunction = new CommonFunctions;
+        \Session::put('CurrentPage','bookEntry');
 
     }
 

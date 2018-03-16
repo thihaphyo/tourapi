@@ -34,11 +34,14 @@ class OrderEntryController extends Controller
         parent::__construct();
         $this->view = "Order.OrderEntry";
         $this->CommonFunction = new CommonFunctions;
+
     }
 
     public function index(){
 
         try{
+
+            \Session::put('CurrentPage','orderEntry');
 
             $sql = "SELECT
                     tbl_book.book_uniq_idx as book_id,

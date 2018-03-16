@@ -23,11 +23,14 @@ class StatusListingController extends Controller
         $this->view = "Status.StatusListing";
         $this->CommonFunction = new CommonFunctions;
 
+
     }
 
     public function index(){
 
         try{
+            \Session::put('CurrentPage','statusListing');
+
             $this->master_array=array('book_data'=>null);
 
             return $this->CommonFunction->Redirect($this->view,$this->master_array);

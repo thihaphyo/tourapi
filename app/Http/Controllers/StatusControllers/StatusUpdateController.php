@@ -25,17 +25,22 @@ class StatusUpdateController extends Controller
         $this->view = "Status.StatusUpdate";
         $this->CommonFunction = new CommonFunctions;
 
+
     }
 
     public function  index(Request $request){
 
         try{
 
+
+            \Session::put('CurrentPage','statusEntry');
+
             $this->status_id = $request->get('id');
 
             $sql = "SELECT * FROM tbl_status WHERE tbl_status.idx = ?";
 
             $res=DB::select($sql,[$this->status_id]);
+
 
             $this->master_array = array('Status_data' => $res[0]);
 

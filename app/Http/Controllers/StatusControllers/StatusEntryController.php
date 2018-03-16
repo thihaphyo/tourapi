@@ -22,12 +22,14 @@ class StatusEntryController extends Controller
         $this->view = "Status.StatusEntry";
         $this->CommonFunction = new CommonFunctions;
 
+
     }
 
 
     public function  index(){
         try{
 
+            \Session::put('CurrentPage','statusEntry');
 
             $this->master_array=array('publisher_data'=>null);
 

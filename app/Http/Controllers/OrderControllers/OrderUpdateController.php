@@ -34,6 +34,7 @@ class OrderUpdateController extends Controller
         parent::__construct();
         $this->view = "Order.OrderUpdate";
         $this->CommonFunction = new CommonFunctions;
+        \Session::put('CurrentPage','orderEntry');
 
     }
 
@@ -81,10 +82,12 @@ class OrderUpdateController extends Controller
             $order_log_res = DB::select($order_log_sql,[$this->order_uniq_id]);
 
             $status_log = "SELECT 
-                           tbl_status_log.status_id as status_id,
+                           tbl_status.status_name as status_id,
                            DATE_FORMAT(FROM_UNIXTIME(tbl_status_log.status_changed_time),'%Y/%m/%d') as status_time
-                           FROM tbl_status_log
-                           WHERE tbl_status_log.order_id = ?";
+                           FROM tbl_status_log,tbl_status
+                           WHERE 
+                           tbl_status_log.status_id = tbl_status.idx AND 
+                           tbl_status_log.order_id = ?";
 
             $status_log_res = DB::select($status_log,[$this->order_uniq_id]);
 
@@ -249,10 +252,14 @@ class OrderUpdateController extends Controller
            DB::select($status_log_update,[$this->order_uniq_id,$status_id,strtotime($status_date)]);
 
            $status_log = "SELECT 
-                          tbl_status_log.status_id,
+                          tbl_status.status_name as status_id,
                           DATE_FORMAT(FROM_UNIXTIME(tbl_status_log.status_changed_time),'%Y/%m/%d') as status_changed_time
-                          FROM tbl_status_log
-                          WHERE tbl_status_log.order_id = ?";
+                          FROM tbl_status_log,tbl_status
+                          WHERE
+                          tbl_status.idx = tbl_status_log.status_id
+                          AND 
+                          tbl_status_log.order_id = ?
+                          ";
 
            $res=DB::select($status_log,[$this->order_uniq_id]);
 

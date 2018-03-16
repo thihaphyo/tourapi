@@ -60,6 +60,8 @@
 
     <link rel="stylesheet" href="{{asset('bower_components/select2/css/select2.bootstrap.min.css')}}">
 
+    <link rel="stylesheet" href="{{asset('bower_components/jquery-confirm2/dist/jquery-confirm.min.css')}}"/>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -106,7 +108,7 @@
                 <li class="header">MAIN NAVIGATION</li>
 
 
-                <li  class="treeview">
+                <li  class="treeview {{\Session::get('CurrentPage') == 'bookEntry' ? 'active' : ''}}">
                     <a href="{{url('BookEntry')}}">
                         <i class="fa fa-book"></i>
                         <span>Add New Book</span>
@@ -118,7 +120,9 @@
 
                 </li>
 
-                <li>
+
+
+                <li class="{{\Session::get('CurrentPage') == 'bookListing' ? 'active' : ''}}">
                     <a href="{{url('BookListing')}}">
                         <i class="fa fa-credit-card"></i>
                         <span>Book Listing</span>
@@ -130,7 +134,7 @@
 
                 </li>
 
-                <li>
+                <li class="{{\Session::get('CurrentPage') == 'statusEntry' ? 'active' : ''}}">
                     <a href="{{url('StatusEntry')}}">
                         <i class="fa fa-credit-card"></i>
                         <span>Add New Status</span>
@@ -140,7 +144,7 @@
                     </a>
                 </li>
 
-                <li>
+                <li class="{{\Session::get('CurrentPage') == 'statusListing' ? 'active' : ''}}">
                     <a href="{{url('GetStatusList')}}">
                         <i class="fa fa-credit-card"></i>
                         <span>Status Listing</span>
@@ -150,7 +154,7 @@
                     </a>
                 </li>
 
-                <li>
+                <li class="{{\Session::get('CurrentPage') == 'orderEntry' ? 'active' : ''}}">
                     <a href="{{url('OrderEntry')}}">
                         <i class="fa fa-credit-card"></i>
                         <span>Add New Order</span>
@@ -160,7 +164,7 @@
                     </a>
                 </li>
 
-                <li>
+                <li class="{{\Session::get('CurrentPage') == 'orderListing' ? 'active' : ''}}">
                     <a href="{{url('OrderListing')}}">
                         <i class="fa fa-credit-card"></i>
                         <span>Order Listing</span>
@@ -229,6 +233,7 @@
 
 <script src="{{asset('bower_components/select2/js/select2.js')}}"></script>
 
+<script src="{{asset('bower_components/jquery-confirm2/dist/jquery-confirm.min.js')}}"></script>
 
 </body>
 </html>

@@ -163,7 +163,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="cust_address">Customer Address:</label>
-                            <input type="text" class="form-control" id="cust_address" name="cust_address" >
+                            <textarea rows="8" class="form-control" id="cust_address" name="cust_address" ></textarea>
                         </div>
                     </div>
                 </div>
@@ -172,7 +172,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="cust_remark">Remark:</label>
-                            <input type="text" class="form-control" id="cust_remark" name="cust_remark" >
+                            <textarea rows="8" class="form-control" id="cust_remark" name="cust_remark" ></textarea>
                         </div>
                     </div>
                 </div>

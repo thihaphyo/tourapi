@@ -23,11 +23,15 @@ class OrderListingController extends Controller
         $this->view = "Order.OrderListing";
         $this->CommonFunction = new CommonFunctions;
 
+
     }
 
     public function index(){
 
         try{
+
+            \Session::put('CurrentPage','orderListing');
+
             $this->master_array=array('book_data'=>null);
 
             return $this->CommonFunction->Redirect($this->view,$this->master_array);

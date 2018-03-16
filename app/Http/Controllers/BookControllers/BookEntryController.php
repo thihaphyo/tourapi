@@ -28,11 +28,14 @@ class BookEntryController extends Controller
     	$this->view = "Book.BookEntry";
         $this->CommonFunction = new CommonFunctions;
 
+
     }
 
     public function index(){
 
     	try{
+
+            \Session::put('CurrentPage','bookEntry');
 
     	    $sql = "SELECT 
                     publisher.idx,
