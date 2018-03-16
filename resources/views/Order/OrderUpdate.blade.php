@@ -18,7 +18,7 @@
 @section('content')
 
     <style>
-    
+
         .select2-container--bootstrap{
             width: 100%!important;
         }
@@ -45,8 +45,8 @@
 
         $('document').ready(function () {
 
-            $( "#dateRange" ).datepicker();
-            $('#statusDate').datepicker();
+            $( "#dateRange" ).datepicker({ dateFormat: 'yy-mm-dd' });
+            $('#statusDate').datepicker({ dateFormat: 'yy-mm-dd' });
 
             $( "#item_name" ).select2({
                 theme: "bootstrap"
@@ -223,7 +223,7 @@
                 });
 
 
-                alert($('#bookName').val());
+
 
 
                 var formData = {
@@ -249,6 +249,53 @@
                         if(data=="Success"){
                             alert('Successfully Updated Item Info');
                         }
+
+                    },
+                    error: function (data) {
+                        console.log('Error:', data);
+                    }
+                });
+
+
+            });
+
+
+            $('#btn-Status').on('click',function () {
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    }
+                });
+
+
+
+
+
+                var formData = {
+                    order_id: $('#hddOrderUniqID').val(),
+                    status_name: $("#status_name option:selected").val(),
+                    status_date: $('#statusDate').val()
+
+                };
+
+
+
+                var StatusUpdateUrl = "StatusUpdate";
+                var type = "GET";
+
+                var StatusLogUrl = "GetStatusLog";
+
+
+                $.ajax({
+
+                    type: type,
+                    url: StatusUpdateUrl,
+                    data: formData,
+                    dataType: 'json',
+                    success: function (data) {
+
+                        $('#status_body').html(data.toString());
 
                     },
                     error: function (data) {
@@ -468,7 +515,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="status_id">Status Name:</label>
-                                        <select class="form-control select-box" id="item_name" name="item_name">
+                                        <select class="form-control select-box" id="status_name" name="status_name">
                                             @foreach($status_list as $key => $value)
                                                 <option value="{{$value->idx}}" {{$value->idx == $data->status_id ? "selected" : ""}}>{{$value->status_name}}</option>
                                             @endforeach
@@ -509,7 +556,7 @@
                                         <th class="text-info">Status ID</th>
                                         <th class="text-info">Changed Time</th>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="status_body">
                                         @foreach($status_log as $key=> $value)
                                             <tr>
                                                 <td>{{$value->status_id}}</td>

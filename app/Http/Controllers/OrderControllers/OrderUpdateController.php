@@ -214,11 +214,84 @@ class OrderUpdateController extends Controller
 
         }catch (\Exception $exception)
         {
-            return json_encode($exception->getMessage());
+            return json_encode("Error");
         }
 
 
 
 
+    }
+
+    public function UpdateStatusInfo(Request $request)
+    {
+
+       try{
+
+           $status_id = $request->get('status_name');
+           $status_date = $request->get('status_date');
+           $this->order_uniq_id = $request->get('order_id');
+
+
+           $sql = "
+                UPDATE
+                tbl_order
+                SET tbl_order.current_status_id=?
+                WHERE tbl_order.order_uniq_idx = ?";
+
+           DB::select($sql,[$status_id,$this->order_uniq_id]);
+
+           $status_log_update = "INSERT 
+                              INTO
+                              tbl_status_log
+                              (order_id, status_id, status_changed_time)
+                              VALUES (?,?,?)";
+
+           DB::select($status_log_update,[$this->order_uniq_id,$status_id,strtotime($status_date)]);
+
+           $status_log = "SELECT 
+                          tbl_status_log.status_id,
+                          DATE_FORMAT(FROM_UNIXTIME(tbl_status_log.status_changed_time),'%Y/%m/%d') as status_changed_time
+                          FROM tbl_status_log
+                          WHERE tbl_status_log.order_id = ?";
+
+           $res=DB::select($status_log,[$this->order_uniq_id]);
+
+           $html = '';
+
+           foreach ($res as $key => $value)
+           {
+               $html.="<tr>";
+               $html.="<td>";
+               $html.=$value->status_id;
+               $html.="</td>";
+               $html.="<td>";
+               $html.=$value->status_changed_time;
+               $html.="</td>";
+               $html.="</tr>";
+
+           }
+
+           return json_encode($html);
+
+       }catch (\Exception $exception)
+       {
+           return json_encode($exception->getMessage());
+       }
+
+
+
+    }
+
+    public function GetStatusLog(Request $request)
+    {
+        $this->order_uniq_id = $request->get('order_id');
+
+        $sql = "SELECT tbl_status_log.status_id,tbl_status_log.status_changed_time
+                FROM tbl_status_log
+                WHERE tbl_status_log.order_id = ?";
+
+        $res=DB::select($sql,[$this->order_uniq_id]);
+
+        print_r($res);
     }
 }
