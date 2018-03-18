@@ -5,6 +5,7 @@ namespace App\Http\Controllers\OrderControllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Library\CommonFunctions;
+use App\Objects\BookObject;
 use DB;
 use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\Facades\DataTables;
@@ -28,6 +29,7 @@ class OrderEntryController extends Controller
     protected $CommonFunction;
     protected $status;
     private  $bookID;
+
 
     function __construct()
     {
@@ -87,21 +89,37 @@ class OrderEntryController extends Controller
            $book_arr = $request->get('hddBookName');
            $book_price = $request->get('hddBookPrice');
 
-           for($i=0;$i<sizeof($book_arr);$i++)
+
+           $master_book =array();
+
+           for ($z = 0 ; $z < sizeof($book_price); $z++)
            {
-               $json_array[]=array($book_arr[$i]=>$book_price[$i]);
+                array_push($master_book,['id'=>$this->bookID[$z],'name'=>$book_arr[$z],'price'=>$book_price[$z]]);
+
+
            }
 
-           for ($z =0; $z < sizeof($json_array);$z++)
-           {
-               $json_array2[]=array($this->bookID[$z]=>$json_array[$z]);
 
-           }
+
+
+//
+//           dd(json_encode($master_book,JSON_UNESCAPED_UNICODE));
+//
+//           for($i=0;$i<sizeof($book_arr);$i++)
+//           {
+//               $json_array[]=array($book_arr[$i]=>$book_price[$i]);
+//           }
+//
+//           for ($z =0; $z < sizeof($json_array);$z++)
+//           {
+//               $json_array2[]=array($this->bookID[$z]=>$json_array[$z]);
+//
+//           }
 
 
            $this->order_uniq_id = $request->get('hddOrderUniqID');
            $this->order_date = $request->get('dateRange');
-           $this->order_item = json_encode($json_array2);
+           $this->order_item = json_encode($master_book,JSON_UNESCAPED_UNICODE);
            $this->cust_name = $request->get('cust_name');
            $this->cust_ph = $request->get('cust_phone');
            $this->cust_address = $request->get('cust_address');

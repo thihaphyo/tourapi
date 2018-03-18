@@ -73,6 +73,8 @@ class OrderUpdateController extends Controller
 
 
 
+
+
             $order_log_sql = "SELECT
                               tbl_order_log.book_uniq_idx
                               FROM
@@ -107,9 +109,10 @@ class OrderUpdateController extends Controller
 
             foreach ($order_items as $key=>$val)
             {
-                $book_id=key($val);
-                $book_name =key($val->$book_id);
-                $book_price = $val->$book_id->$book_name;
+
+                $book_id=$val->id;
+                $book_name =$val->name;
+                $book_price = $val->price;
                 $book_name_arr.=$book_name.',';
                 $book_id_arr.=$book_id.',';
                 $book_price_arr.=$book_price.',';
@@ -178,18 +181,31 @@ class OrderUpdateController extends Controller
             $this->order_date = $request->get('order_date');
             $this->order_uniq_id = $request->get('order_id');
 
-            for($i=0;$i<sizeof($book_arr);$i++)
+
+            $master_book =array();
+
+            for ($z = 0 ; $z < sizeof($book_price); $z++)
             {
-                $json_array[]=array($book_arr[$i]=>$book_price[$i]);
+               if($book_price[$z] != "")
+               {
+                   array_push($master_book,['id'=>$this->bookID[$z],'name'=>$book_arr[$z],'price'=>$book_price[$z]]);
+               }
+
             }
 
-            for ($z =0; $z < sizeof($json_array);$z++)
-            {
-                $json_array2[]=array($this->bookID[$z]=>$json_array[$z]);
+//            for($i=0;$i<sizeof($book_arr);$i++)
+//            {
+//                $json_array[]=array($book_arr[$i]=>$book_price[$i]);
+//            }
+//
+//            for ($z =0; $z < sizeof($json_array);$z++)
+//            {
+//                $json_array2[]=array($this->bookID[$z]=>$json_array[$z]);
+//
+//            }
 
-            }
+            $this->order_item = json_encode($master_book,JSON_UNESCAPED_UNICODE);
 
-            $this->order_item = json_encode($json_array2);
 
             $sql = "UPDATE tbl_order 
                 SET tbl_order.order_date = ? ,
@@ -217,11 +233,9 @@ class OrderUpdateController extends Controller
 
         }catch (\Exception $exception)
         {
+            dd($exception->getMessage());
             return json_encode("Error");
         }
-
-
-
 
     }
 

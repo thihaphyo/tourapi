@@ -54,7 +54,8 @@ class OrderListingController extends Controller
                     tbl_status.status_name as current_status,    
                     DATE_FORMAT(FROM_UNIXTIME(tbl_status_log.status_changed_time),'%Y/%m/%d') as status_date,
                     tbl_order.order_item as json_items,
-                    JSON_LENGTH(tbl_order.order_item) as item_count
+                    JSON_LENGTH(tbl_order.order_item) as item_count,
+                    JSON_EXTRACT(tbl_order.order_item,'$[*].price') as price
                     from tbl_order,tbl_status_log,tbl_status
                     WHERE tbl_order.order_uniq_idx = tbl_status_log.order_id
                     AND tbl_order.current_status_id = tbl_status_log.status_id
@@ -66,19 +67,11 @@ class OrderListingController extends Controller
 
             foreach ($res as $key => $val)
             {
-                $json = json_decode($val->json_items);
-
                 $total = 0;
-                foreach ($json as $k => $v)
-                {
-                    $book_id = key($v);
-                    $book_name = key($v->$book_id);
-                    $book_price = $v->$book_id->$book_name;
-                    $total = $total+$book_price;
+                $book_price= array_sum(json_decode($val->price));
+                $total = $total+$book_price;
+                $val->total_price=$total;
 
-                }
-
-                $val->total_price = $total;
             }
 
             $datatables =  Datatables::of($res)->addColumn('action', function ($result) {
@@ -89,6 +82,7 @@ class OrderListingController extends Controller
 
         }catch (\Exception $exception)
         {
+            dd($exception->getMessage());
             return json_encode('500 Error');
         }
     }

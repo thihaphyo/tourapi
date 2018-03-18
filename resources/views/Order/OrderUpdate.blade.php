@@ -75,11 +75,13 @@
 
                 $('#bookName').val(arr.toString());
 
+
                 var arr2 = $('#bookID').val().split(",");
 
                 arr2.push(book_id);
 
                 $('#bookID').val(arr2.toString());
+
 
                 var arr3 = $('#bookPrice').val().split(",");
 
@@ -140,6 +142,8 @@
 
                 arr2.splice(index, 1);
 
+
+
                 $('#bookID').val(arr2.toString());
 
 
@@ -170,6 +174,7 @@
                     $('#item_table > tbody').append(no_html);
                     $('#lblTotal').text(total);
                     $('#hddTotal').val(total);
+
 
                 }
             });
@@ -484,11 +489,11 @@
                                         <tbody>
                                         <?php $price = 0;$book_name_arr='';$book_id_arr= '';$book_price_arr='';?>
                                         @foreach($order_items as $key => $value)
-                                            <?php $book_id = key($value);
+                                            <?php $book_id = $value->id;
 
 
-                                                  $book_name= key($value->$book_id);
-                                                  $book_price = $value->$book_id->$book_name;
+                                                  $book_name= $value->name;
+                                                  $book_price = $value->price;
 
                                                   $price+=$book_price;?>
                                                <tr>
