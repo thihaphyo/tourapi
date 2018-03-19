@@ -48,6 +48,8 @@ class StatusEntryController extends Controller
 
 
         try{
+            DB::beginTransaction();
+
             $sql = "INSERT
                 INTO tbl_status
                 (status_name)
@@ -55,10 +57,14 @@ class StatusEntryController extends Controller
 
             DB::select($sql,[$this->status_name]);
 
+            DB::commit();
+
             $this->status = true;
 
         }catch (\Exception $exception)
         {
+            DB::rollback();
+
             $this->status = false;
         }
 

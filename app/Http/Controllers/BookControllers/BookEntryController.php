@@ -64,6 +64,8 @@ class BookEntryController extends Controller
         $this->price = $request->get('book_price');
 
         try{
+            DB::beginTransaction();
+
             $sql = "INSERT
                 INTO tbl_book
                 (publisher_id,book_uniq_idx,Price,book_name)
@@ -71,10 +73,14 @@ class BookEntryController extends Controller
 
             DB::select($sql,[$this->author_id,$this->book_uniq_id,$this->price,$this->book_name]);
 
+            DB::commit();
+
             $this->status = true;
 
         }catch (\Exception $exception)
         {
+            DB::rollback();
+
             $this->status = false;
         }
 

@@ -42,7 +42,10 @@
             });
 
 
+            $('#btn-import').on('click',function (e) {
 
+                window.location="/ExcelImport";
+            });
 
         });
 
@@ -64,8 +67,10 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="col-md-4 pull-right">
+
+                        <div class="col-md-12 pull-right">
                             <button type="button" class="btn btn-primary pull-right" id="btn-add">Add New Book</button>
+                            <button type="button" class="btn btn-primary pull-right" id="btn-import" style="margin-right: 10px;">Import Book</button>
                         </div>
                     </div>
                 </div>

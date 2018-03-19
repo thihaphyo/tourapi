@@ -96,3 +96,7 @@ Route::get('ItemUpdate','OrderControllers\OrderUpdateController@UpdateItemInfo')
 Route::get('OrderStatusUpdate','OrderControllers\OrderUpdateController@UpdateStatusInfo');
 
 Route::get('GetStatusLog','OrderControllers\OrderUpdateController@GetStatusLog');
+
+Route::get('ExcelImport','ImportingControllers\BookImportController@index');
+
+Route::post('BookImport','ImportingControllers\BookImportController@Import');

@@ -71,10 +71,6 @@ class OrderUpdateController extends Controller
             $order_res = DB::select($order_sql,[$this->order_uniq_id]);
 
 
-
-
-
-
             $order_log_sql = "SELECT
                               tbl_order_log.book_uniq_idx
                               FROM
@@ -147,6 +143,8 @@ class OrderUpdateController extends Controller
 
         try{
 
+            DB::beginTransaction();
+
             $sql = "UPDATE
                 tbl_order
                 SET 
@@ -159,10 +157,14 @@ class OrderUpdateController extends Controller
 
             DB::select($sql,[$cust_name,$cust_phone,$cust_address,$remark,$postcode,$order_uniq_id]);
 
+            DB::commit();
+
             return json_encode("Success");
 
         }catch (\Exception $exception)
         {
+            DB::rollback();
+
             return json_encode("Error");
         }
 
@@ -206,6 +208,7 @@ class OrderUpdateController extends Controller
 
             $this->order_item = json_encode($master_book,JSON_UNESCAPED_UNICODE);
 
+            DB::beginTransaction();
 
             $sql = "UPDATE tbl_order 
                 SET tbl_order.order_date = ? ,
@@ -228,12 +231,14 @@ class OrderUpdateController extends Controller
                 DB::select($order_sql,[$this->order_uniq_id,$value,strtotime('now')]);
             }
 
+            DB::commit();
+
             return json_encode("Success");
 
 
         }catch (\Exception $exception)
         {
-            dd($exception->getMessage());
+            DB::rollback();
             return json_encode("Error");
         }
 
@@ -248,6 +253,7 @@ class OrderUpdateController extends Controller
            $status_date = $request->get('status_date');
            $this->order_uniq_id = $request->get('order_id');
 
+           DB::beginTransaction();
 
            $sql = "
                 UPDATE
@@ -264,6 +270,8 @@ class OrderUpdateController extends Controller
                               VALUES (?,?,?)";
 
            DB::select($status_log_update,[$this->order_uniq_id,$status_id,strtotime($status_date)]);
+
+           DB::commit();
 
            $status_log = "SELECT 
                           tbl_status.status_name as status_id,
@@ -296,6 +304,7 @@ class OrderUpdateController extends Controller
 
        }catch (\Exception $exception)
        {
+           DB::rollback();
            return json_encode($exception->getMessage());
        }
 
@@ -306,6 +315,7 @@ class OrderUpdateController extends Controller
     public function GetStatusLog(Request $request)
     {
         $this->order_uniq_id = $request->get('order_id');
+
 
         $sql = "SELECT tbl_status_log.status_id,tbl_status_log.status_changed_time
                 FROM tbl_status_log

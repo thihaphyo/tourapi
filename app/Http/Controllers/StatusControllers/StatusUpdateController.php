@@ -62,12 +62,16 @@ class StatusUpdateController extends Controller
             $this->status_id = $request->get('hddStatusIDX');
             $this->status_name = $request->get('status_name');
 
+            DB::beginTransaction();
+
             $sql = "UPDATE
                     tbl_status
                     SET tbl_status.status_name=?
                     WHERE tbl_status.idx = ?";
 
             DB::select($sql,[$this->status_name,$this->status_id]);
+
+            DB::commit();
 
             $this->status = true;
 
@@ -76,6 +80,7 @@ class StatusUpdateController extends Controller
 
         }catch (\Exception $exception)
         {
+            DB::rollback();
 
             $this->status = false;
             return redirect()->back()->withInput();

@@ -12,7 +12,7 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-    <link rel="shortcut icon" href="https://dashboard.mintheinkha.com/assets/uploads/astrologer/mintheinkha_logo.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="{{asset('images/wunzin.png')}}" type="image/x-icon" />
 
     <!-- Bootstrap 3.3.6 -->
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
@@ -90,7 +90,7 @@
                 <ul class="nav navbar-nav">
                     <!-- Messages: style can be found in dropdown.less-->
                     <li class="dropdown messages-menu">
-                         <a href="{{'SignOut'}}" class="dropdown-toggle" data-toggle="dropdown">
+                         <a href="{{'SignOut'}}">
                             <i class="fa fa-sign-out"></i>
                          </a>
                     </li>
@@ -121,6 +121,17 @@
                 </li>
 
 
+                <li class="{{\Session::get('CurrentPage') == 'bookImport' ? 'active' : ''}}">
+                    <a href="{{url('ExcelImport')}}">
+                        <i class="fa fa-cloud-upload"></i>
+                        <span>Book Importing</span>
+                        <span class="pull-right-container">
+                         <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+
+
+                </li>
 
                 <li class="{{\Session::get('CurrentPage') == 'bookListing' ? 'active' : ''}}">
                     <a href="{{url('BookListing')}}">

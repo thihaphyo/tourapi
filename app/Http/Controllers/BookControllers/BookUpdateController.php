@@ -80,6 +80,7 @@ class BookUpdateController extends Controller
             $this->author_id = $request->get('author_id');
             $this->price = $request->get('book_price');
 
+            DB::beginTransaction();
 
             $sql = "UPDATE
                     tbl_book
@@ -91,6 +92,8 @@ class BookUpdateController extends Controller
 
           DB::select($sql,[$this->book_uniq_id,$this->book_name,$this->author_id,$this->price,$this->book_idx]);
 
+          DB::commit();
+
           $this->status = true;
 
           return redirect('BookListing');
@@ -98,6 +101,7 @@ class BookUpdateController extends Controller
 
         }catch (\Exception $exception)
         {
+            DB::rollback();
 
             $this->status = false;
             return redirect()->back()->withInput();

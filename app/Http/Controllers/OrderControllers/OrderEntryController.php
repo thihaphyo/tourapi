@@ -127,7 +127,7 @@ class OrderEntryController extends Controller
            $this->current_status_id = 0;
            $this->postcode = 0;
 
-
+           DB::beginTransaction();
 
            $sql = "INSERT INTO
                 tbl_order
@@ -156,12 +156,15 @@ class OrderEntryController extends Controller
 
            $this->status = true;
 
+           DB::commit();
+
 
            return redirect('OrderListing');
 
        }catch (\Exception $exception)
        {
-           dd($exception);
+
+           DB::rollback();
            $this->status=false;
 
            return json_encode($exception->getMessage());

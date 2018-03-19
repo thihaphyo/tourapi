@@ -327,6 +327,7 @@
 
                     },
                     error: function (data) {
+                        $("#LoadingImage").hide();
                         console.log('Error:', data);
                     }
                 });
