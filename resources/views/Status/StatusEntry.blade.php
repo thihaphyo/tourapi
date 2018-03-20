@@ -18,6 +18,36 @@
 @section('content')
     <script>
 
+        $(document).ready(function(e){
+
+            $('#btn-Save-Status').on('click',function (e) {
+
+                $('input').removeClass('ui-state-error');
+
+                e.preventDefault();
+
+                let valueArray = [$('#status_name').val()];
+
+                let nameArray = ['#status_name'];
+
+                let errors =CheckNull(valueArray,nameArray);
+
+                if(errors != 'Pass')
+                {
+                    $(errors).addClass("ui-state-error");
+
+                    $.alert({
+                        title: 'Error',
+                        content: 'Incomplete Information!',
+                    });
+                }else{
+                    $('#status-form').submit();
+                }
+
+
+            });
+
+        });
 
     </script>
     <div class="container content-body">
@@ -27,7 +57,7 @@
                 <h4 class="h4 heading-blue">Status Entry</h4>
             </div>
         </div>
-        <form method="POST"  id="search-form" action="{{'StatusSave'}}">
+        <form method="POST"  id="status-form" action="{{'StatusSave'}}">
             {{csrf_field()}}
 
 
@@ -51,7 +81,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary form-control">Save</button>
+                            <button type="submit" id="btn-Save-Status" class="btn btn-primary form-control">Save</button>
                         </div>
                     </div>
 

@@ -33,6 +33,8 @@
 
            $("#btn-Add").on('click',function(){
 
+               $('#item_table').removeClass("ui-state-error");
+
 
                var book_name = $("#item_name option:selected").text();
                var book_price = $("#item_name option:selected").val().split('book_id')[0];
@@ -92,10 +94,24 @@
                }
            });
 
-           $('#btn-Save').on('click',function(e){
+           $('#btn-Save').on('click',function (e) {
+
+               $('input').removeClass('ui-state-error');
+
                e.preventDefault();
-               if($('#dateRange').val() == '' || $('#cust_name').val() == '' || count == 0)
+
+               let valueArray = [$('#dateRange').val(),$('#cust_name').val() ,count];
+
+               let nameArray = ['#dateRange','#cust_name','#item_table'];
+
+               let errors =CheckNull(valueArray,nameArray);
+
+               if(errors != 'Pass')
                {
+                   $(errors).addClass("ui-state-error");
+
+                   $(errors).focus();
+
                    $.alert({
                        title: 'Error',
                        content: 'Incomplete Information!',
@@ -103,7 +119,11 @@
                }else{
                    $('#order-form').submit();
                }
+
+
            });
+
+
        }) ;
 
     </script>

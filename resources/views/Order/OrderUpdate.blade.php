@@ -62,6 +62,8 @@
 
             $("#btn-Add").on('click',function(){
 
+                $('#item_table').removeClass("ui-state-error");
+
 
                 var book_name = $("#item_name option:selected").text();
                 var book_price = $("#item_name option:selected").val().split('book_id')[0];
@@ -180,18 +182,32 @@
             });
 
 
-            $('#btn-Cust').on('click',function () {
+            $('#btn-Cust').on('click',function (e) {
+
                 $("#LoadingImage").show();
 
-                if($('#cust_name').val() == '')
+                $('input').removeClass('ui-state-error');
+
+
+                let valueArray = [$('#cust_name').val()];
+
+                let nameArray = ['#cust_name'];
+
+                let errors =CheckNull(valueArray,nameArray);
+
+                if(errors != 'Pass')
                 {
                     $("#LoadingImage").hide();
+
+                    $(errors).addClass("ui-state-error");
+
+                    $(errors).focus();
+
                     $.alert({
                         title: 'Error',
                         content: 'Incomplete Information!',
                     });
                 }else{
-
                     $.ajaxSetup({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -232,8 +248,8 @@
                             console.log('Error:', data);
                         }
                     });
-
                 }
+
 
             });
 
@@ -242,15 +258,27 @@
 
                 $("#LoadingImage").show();
 
-                if(count == 0)
+                $('input').removeClass('ui-state-error');
+
+                let valueArray = [count];
+
+                let nameArray = ['#item_table'];
+
+                let errors =CheckNull(valueArray,nameArray);
+
+                if(errors != 'Pass')
                 {
                     $("#LoadingImage").hide();
+
+                    $(errors).addClass("ui-state-error");
+
+                    $(errors).focus();
+
                     $.alert({
                         title: 'Error',
                         content: 'Incomplete Information!',
                     });
                 }else{
-
                     $.ajaxSetup({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -292,11 +320,7 @@
                             console.log('Error:', data);
                         }
                     });
-
-
                 }
-
-
 
             });
 
@@ -305,9 +329,22 @@
 
                 $("#LoadingImage").show();
 
-                if($('#statusDate').val() == '')
+                $('input').removeClass('ui-state-error');
+
+                let valueArray = [$('#statusDate').val()];
+
+                let nameArray = ['#statusDate'];
+
+                let errors =CheckNull(valueArray,nameArray);
+
+                if(errors != 'Pass')
                 {
                     $("#LoadingImage").hide();
+
+                    $(errors).addClass("ui-state-error");
+
+                    $(errors).focus();
+
                     $.alert({
                         title: 'Error',
                         content: 'Incomplete Information!',
@@ -318,7 +355,6 @@
                             'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
                         }
                     });
-
 
                     var formData = {
                         order_id: $('#hddOrderUniqID').val(),
@@ -355,9 +391,6 @@
                         }
                     });
                 }
-
-
-
 
             });
 

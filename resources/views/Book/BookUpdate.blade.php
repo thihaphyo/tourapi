@@ -18,6 +18,35 @@
 @section('content')
     <script>
 
+        $(document).ready(function () {
+
+            $('#btn-Update-Book').on('click',function (e) {
+
+                $('input').removeClass('ui-state-error');
+
+                e.preventDefault();
+
+                let valueArray = [$('#book_id').val(),$('#book_name').val() ,$('#book_price').val()];
+
+                let nameArray = ['#book_id','#book_name','#book_price'];
+
+                let errors =CheckNull(valueArray,nameArray);
+
+                if(errors != 'Pass')
+                {
+                    $(errors).addClass("ui-state-error");
+
+                    $.alert({
+                        title: 'Error',
+                        content: 'Incomplete Information!',
+                    });
+                }else{
+                    $('#book-update-form').submit();
+                }
+
+
+            });
+        });
 
     </script>
 
@@ -28,7 +57,7 @@
                 <h4 class="h4 heading-blue">Book Edit</h4>
             </div>
         </div>
-        <form method="POST"  id="search-form" action="{{'UpdateBook'}}">
+        <form method="POST"  id="book-update-form" action="{{'UpdateBook'}}">
             {{csrf_field()}}
 
             <input type="hidden" name="hddBookIDX" value="{{$book_data->idx}}">
@@ -82,7 +111,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary form-control">Update</button>
+                            <button type="submit" id="btn-Update-Book" class="btn btn-primary form-control">Update</button>
                         </div>
                     </div>
 

@@ -52,51 +52,51 @@ Route::get('ComboChart','ChartControllers\ComboChartController@index');
 
 Route::get('Dashboard',function(){
 	return view('Dashboard');
-});
+})->middleware('user_check');
 
 
-Route::get('BookEntry','BookControllers\BookEntryController@index');
+Route::get('BookEntry','BookControllers\BookEntryController@index')->middleware('user_check');
 
-Route::post('BookSave','BookControllers\BookEntryController@SaveBook');
+Route::post('BookSave','BookControllers\BookEntryController@SaveBook')->middleware('user_check');
 
-Route::get('BookListing','BookControllers\BookListingController@index');
+Route::get('BookListing','BookControllers\BookListingController@index')->middleware('user_check');
 
-Route::get('GetBookList' , 'BookControllers\BookListingController@LoadBook');
+Route::get('GetBookList' , 'BookControllers\BookListingController@LoadBook')->middleware('user_check');
 
-Route::get('BookUpdate','BookControllers\BookUpdateController@BookUpdate');
+Route::get('BookUpdate','BookControllers\BookUpdateController@BookUpdate')->middleware('user_check');
 
-Route::post('UpdateBook','BookControllers\BookUpdateController@Upadte');
+Route::post('UpdateBook','BookControllers\BookUpdateController@Upadte')->middleware('user_check');
 
-Route::get('GetStatusList','StatusControllers\StatusListingController@index');
+Route::get('GetStatusList','StatusControllers\StatusListingController@index')->middleware('user_check');
 
-Route::get('GetStatus','StatusControllers\StatusListingController@LoadStatus');
+Route::get('GetStatus','StatusControllers\StatusListingController@LoadStatus')->middleware('user_check');
 
-Route::get('StatusEntry','StatusControllers\StatusEntryController@index');
+Route::get('StatusEntry','StatusControllers\StatusEntryController@index')->middleware('user_check');
 
-Route::post('StatusSave','StatusControllers\StatusEntryController@SaveStatus');
+Route::post('StatusSave','StatusControllers\StatusEntryController@SaveStatus')->middleware('user_check');
 
-Route::get('StatusUpdate','StatusControllers\StatusUpdateController@index');
+Route::get('StatusUpdate','StatusControllers\StatusUpdateController@index')->middleware('user_check');
 
-Route::post('UpdateStatus','StatusControllers\StatusUpdateController@Update');
+Route::post('UpdateStatus','StatusControllers\StatusUpdateController@Update')->middleware('user_check');
 
-Route::get('OrderEntry','OrderControllers\OrderEntryController@index');
+Route::get('OrderEntry','OrderControllers\OrderEntryController@index')->middleware('user_check');
 
-Route::post('OrderSave','OrderControllers\OrderEntryController@Save');
+Route::post('OrderSave','OrderControllers\OrderEntryController@Save')->middleware('user_check');
 
-Route::get('OrderListing','OrderControllers\OrderListingController@index');
+Route::get('OrderListing','OrderControllers\OrderListingController@index')->middleware('user_check');
 
-Route::get('GetOrderList','OrderControllers\OrderListingController@LoadOrder');
+Route::get('GetOrderList','OrderControllers\OrderListingController@LoadOrder')->middleware('user_check');
 
-Route::get('OrderUpdate','OrderControllers\OrderUpdateController@index');
+Route::get('OrderUpdate','OrderControllers\OrderUpdateController@index')->middleware('user_check');
 
-Route::get('CustUpdate','OrderControllers\OrderUpdateController@UpdateCustomerInfo');
+Route::get('CustUpdate','OrderControllers\OrderUpdateController@UpdateCustomerInfo')->middleware('user_check');
 
-Route::get('ItemUpdate','OrderControllers\OrderUpdateController@UpdateItemInfo');
+Route::get('ItemUpdate','OrderControllers\OrderUpdateController@UpdateItemInfo')->middleware('user_check');
 
-Route::get('OrderStatusUpdate','OrderControllers\OrderUpdateController@UpdateStatusInfo');
+Route::get('OrderStatusUpdate','OrderControllers\OrderUpdateController@UpdateStatusInfo')->middleware('user_check');
 
-Route::get('GetStatusLog','OrderControllers\OrderUpdateController@GetStatusLog');
+Route::get('GetStatusLog','OrderControllers\OrderUpdateController@GetStatusLog')->middleware('user_check');
 
-Route::get('ExcelImport','ImportingControllers\BookImportController@index');
+Route::get('ExcelImport','ImportingControllers\BookImportController@index')->middleware('user_check');
 
-Route::post('BookImport','ImportingControllers\BookImportController@Import');
+Route::post('BookImport','ImportingControllers\BookImportController@Import')->middleware('user_check');

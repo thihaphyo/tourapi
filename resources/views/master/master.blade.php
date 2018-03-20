@@ -246,5 +246,7 @@
 
 <script src="{{asset('bower_components/jquery-confirm2/dist/jquery-confirm.min.js')}}"></script>
 
+<script src="{{asset('js/WunzinValidation.js')}}"></script>
+
 </body>
 </html>
