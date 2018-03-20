@@ -183,47 +183,57 @@
             $('#btn-Cust').on('click',function () {
                 $("#LoadingImage").show();
 
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                    }
-                });
+                if($('#cust_name').val() == '')
+                {
+                    $("#LoadingImage").hide();
+                    $.alert({
+                        title: 'Error',
+                        content: 'Incomplete Information!',
+                    });
+                }else{
 
-                var formData = {
-                    order_id: $('#hddOrderUniqID').val(),
-                    cust_name: $('#cust_name').val(),
-                    cust_phone: $('#cust_phone').val(),
-                    cust_address:$('#cust_address').val(),
-                    remark:$('#remark').val(),
-                    postcode : $('#postcode').val()
-
-
-                };
-
-                var CustUpdateApi = "CustUpdate";
-                var type = "GET";
-
-                $.ajax({
-
-                    type: type,
-                    url: CustUpdateApi,
-                    data: formData,
-                    dataType: 'json',
-                    success: function (data) {
-                        if(data=="Success"){
-                            $("#LoadingImage").hide();
-                            $.alert({
-                                title: 'Information',
-                                content: 'Successfully Updated Customer Info!',
-                            });
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
                         }
+                    });
 
-                    },
-                    error: function (data) {
-                        console.log('Error:', data);
-                    }
-                });
+                    var formData = {
+                        order_id: $('#hddOrderUniqID').val(),
+                        cust_name: $('#cust_name').val(),
+                        cust_phone: $('#cust_phone').val(),
+                        cust_address:$('#cust_address').val(),
+                        remark:$('#remark').val(),
+                        postcode : $('#postcode').val()
 
+
+                    };
+
+                    var CustUpdateApi = "CustUpdate";
+                    var type = "GET";
+
+                    $.ajax({
+
+                        type: type,
+                        url: CustUpdateApi,
+                        data: formData,
+                        dataType: 'json',
+                        success: function (data) {
+                            if(data=="Success"){
+                                $("#LoadingImage").hide();
+                                $.alert({
+                                    title: 'Information',
+                                    content: 'Successfully Updated Customer Info!',
+                                });
+                            }
+
+                        },
+                        error: function (data) {
+                            console.log('Error:', data);
+                        }
+                    });
+
+                }
 
             });
 
@@ -232,51 +242,60 @@
 
                 $("#LoadingImage").show();
 
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                    }
-                });
+                if(count == 0)
+                {
+                    $("#LoadingImage").hide();
+                    $.alert({
+                        title: 'Error',
+                        content: 'Incomplete Information!',
+                    });
+                }else{
 
-
-
-
-
-                var formData = {
-                    order_id: $('#hddOrderUniqID').val(),
-                    order_date: $('#dateRange').val(),
-                    book_names: $('#bookName').val(),
-                    book_ids:$('#bookID').val(),
-                    book_prices:$('#bookPrice').val()
-
-                };
-
-
-                var ItemUpdateUrl = "ItemUpdate";
-                var type = "GET";
-
-                $.ajax({
-
-                    type: type,
-                    url: ItemUpdateUrl,
-                    data: formData,
-                    dataType: 'json',
-                    success: function (data) {
-                        if(data=="Success"){
-                            $("#LoadingImage").hide();
-
-                            $.alert({
-                                title: 'Information',
-                                content: 'Successfully Updated Item Info!',
-                            });
-
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
                         }
+                    });
 
-                    },
-                    error: function (data) {
-                        console.log('Error:', data);
-                    }
-                });
+                    var formData = {
+                        order_id: $('#hddOrderUniqID').val(),
+                        order_date: $('#dateRange').val(),
+                        book_names: $('#bookName').val(),
+                        book_ids:$('#bookID').val(),
+                        book_prices:$('#bookPrice').val()
+
+                    };
+
+
+                    var ItemUpdateUrl = "ItemUpdate";
+                    var type = "GET";
+
+                    $.ajax({
+
+                        type: type,
+                        url: ItemUpdateUrl,
+                        data: formData,
+                        dataType: 'json',
+                        success: function (data) {
+                            if(data=="Success"){
+                                $("#LoadingImage").hide();
+
+                                $.alert({
+                                    title: 'Information',
+                                    content: 'Successfully Updated Item Info!',
+                                });
+
+                            }
+
+                        },
+                        error: function (data) {
+                            console.log('Error:', data);
+                        }
+                    });
+
+
+                }
+
 
 
             });
@@ -286,55 +305,61 @@
 
                 $("#LoadingImage").show();
 
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                    }
-                });
+                if($('#statusDate').val() == '')
+                {
+                    $("#LoadingImage").hide();
+                    $.alert({
+                        title: 'Error',
+                        content: 'Incomplete Information!',
+                    });
+                }else{
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                        }
+                    });
 
 
-                var formData = {
-                    order_id: $('#hddOrderUniqID').val(),
-                    status_name: $("#status_name option:selected").val(),
-                    status_date: $('#statusDate').val()
+                    var formData = {
+                        order_id: $('#hddOrderUniqID').val(),
+                        status_name: $("#status_name option:selected").val(),
+                        status_date: $('#statusDate').val()
 
-                };
+                    };
+
+                    var StatusUpdateUrl = "OrderStatusUpdate";
+                    var type = "GET";
+
+                    var StatusLogUrl = "GetStatusLog";
+
+                    $.ajax({
+
+                        type: type,
+                        url: StatusUpdateUrl,
+                        data: formData,
+                        dataType: 'json',
+                        success: function (data) {
+
+                            $('#status_body').html(data.toString());
+                            $("#LoadingImage").hide();
+
+                            $.alert({
+                                title: 'Information',
+                                content: 'Successfully Updated Status Info!',
+                            });
+
+                        },
+                        error: function (data) {
+                            $("#LoadingImage").hide();
+                            console.log('Error:', data);
+                        }
+                    });
+                }
 
 
-
-                var StatusUpdateUrl = "OrderStatusUpdate";
-                var type = "GET";
-
-                var StatusLogUrl = "GetStatusLog";
-
-
-
-                $.ajax({
-
-                    type: type,
-                    url: StatusUpdateUrl,
-                    data: formData,
-                    dataType: 'json',
-                    success: function (data) {
-
-                        $('#status_body').html(data.toString());
-                        $("#LoadingImage").hide();
-
-                        $.alert({
-                            title: 'Information',
-                            content: 'Successfully Updated Status Info!',
-                        });
-
-                    },
-                    error: function (data) {
-                        $("#LoadingImage").hide();
-                        console.log('Error:', data);
-                    }
-                });
 
 
             });
-
 
         }) ;
     </script>

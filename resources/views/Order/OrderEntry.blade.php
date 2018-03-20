@@ -91,6 +91,19 @@
 
                }
            });
+
+           $('#btn-Save').on('click',function(e){
+               e.preventDefault();
+               if($('#dateRange').val() == '' || $('#cust_name').val() == '' || count == 0)
+               {
+                   $.alert({
+                       title: 'Error',
+                       content: 'Incomplete Information!',
+                   });
+               }else{
+                   $('#order-form').submit();
+               }
+           });
        }) ;
 
     </script>
@@ -101,7 +114,7 @@
                 <h4 class="h4 heading-blue">Order Entry</h4>
             </div>
         </div>
-        <form method="POST"  id="search-form" action="{{'OrderSave'}}">
+        <form method="POST"  id="order-form" action="{{'OrderSave'}}">
             {{csrf_field()}}
 
             <input type="hidden" id="hddOrderUniqID" name="hddOrderUniqID" value="{{$auto_id}}">
@@ -223,7 +236,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary form-control">Save</button>
+                            <button type="submit" id="btn-Save" class="btn btn-primary form-control">Save</button>
                         </div>
                     </div>
 

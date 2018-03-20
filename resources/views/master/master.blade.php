@@ -75,7 +75,7 @@
         <!-- Logo -->
         <a href="#" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>WZ</b></span>
+            <span class="logo-mini"><img src="{{asset('images/wunzin.png')}}" class="img-responsive img-circle" style="padding: 10px;"> </span>
             <!-- logo for regular state and mobile devices -->
             <span class="logo-lg"><b>Wun Zin</b></span>
         </a>
@@ -218,7 +218,7 @@
 
 
 <!-- Morris.js charts -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="{{asset('bower_components/raphael/raphael.min.js')}}"></script>
 
 <!-- jvectormap -->
 <script src="{{asset('plugins/jvectormap/jquery-jvectormap-1.2.2.min.js')}}"></script>
@@ -226,7 +226,7 @@
 <script src="{{asset('plugins/jvectormap/jquery-jvectormap-world-mill-en.js')}}"></script>
 
 <!-- daterangepicker -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+<script src="{{asset('bower_components/moment/min/moment.min.js')}}"></script>
 <script src="{{'js/daterangepicker.js'}}"></script>
 
 <!-- Bootstrap WYSIHTML5 -->
