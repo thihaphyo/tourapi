@@ -36,4 +36,33 @@ Route::get('/jsonData',function(){
 	return json_encode($data);
 });
 
+
+Route::get('/GetHomeMenu',function(){
+    $sql = "SELECT * FROM tbl_home_menu";
+
+    $res = \DB::select($sql);
+
+    return json_encode($res);
+});
+
+Route::get('/GetBeachTabs',function(){
+
+    $sql = "SELECT tab_name FROM tbl_tabs WHERE activity_id = ?";
+
+    $res = \DB::select($sql,['BeachActivity']);
+
+    return json_encode($res);
+
+});
+
+Route::get('/GetSliderUrl',function(){
+
+    $sql = "SELECT slider_url FROM tbl_slider WHERE silder_category = ?";
+
+    $res = \DB::select($sql,['chaung_thar']);
+
+    return json_encode($res,JSON_UNESCAPED_SLASHES);
+
+});
+
 Route::post('/CustUpdate','OrderControllers\OrderUpdateController@UpdateCustomerInfo');
